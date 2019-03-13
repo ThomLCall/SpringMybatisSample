@@ -19,6 +19,7 @@
             <th>Name</th>
             <th>Team</th>
             <th>Position</th>
+            <th>Diet</th>
             <th></th>
             <th></th>
             <th></th>
@@ -30,6 +31,7 @@
             <td th:text="*{name}"></td>
             <td th:text="*{team}"></td>
             <td th:text="*{position}"></td>
+            <td th:text="*{diet}"></td>
             <td><a class="btn btn-default btn-xs" th:href="@{/players/{id}(id=*{id})}">Show</a></td>
             <td><a class="btn btn-default btn-xs" th:href="@{/players/{id}/edit(id=*{id})}">Edit</a></td>
             <td>

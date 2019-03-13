@@ -5,11 +5,18 @@ public class Player {
     private String name;
     private String team;
     private String position;
+    private String diet;
 
     public Long getId() {
         return id;
     }
-    public void setId(Long id) {
+    public String getDiet() {
+		return diet;
+	}
+	public void setDiet(String diet) {
+		this.diet = diet;
+	}
+	public void setId(Long id) {
         this.id = id;
     }
     public String getName() {

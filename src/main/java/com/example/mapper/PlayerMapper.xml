@@ -8,10 +8,10 @@
       select * from player where id = #{id}
    </select>
    <insert id="save" useGeneratedKeys="true" keyProperty="id">
-     insert into player (name, team, position) values (#{name}, #{team}, #{position})
+     insert into player (name, team, position, diet) values (#{name}, #{team}, #{position}, #{diet})
    </insert>
    <update id="update">
-     update player set name = #{name}, team = #{team}, position = #{position} where id = #{id}
+     update player set name = #{name}, team = #{team}, position = #{position}, diet=#{diet} where id = #{id}
    </update>
    <delete id="delete">
      delete from player where id = #{id}
