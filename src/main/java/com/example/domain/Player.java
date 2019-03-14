@@ -1,9 +1,11 @@
 package com.example.domain;
 
+import org.springframework.context.annotation.Bean;
+
 public class Player {
     private Long id;
     private String name;
-    private String team;
+    private Long id_team;
     private String position;
     private String diet;
 
@@ -25,11 +27,11 @@ public class Player {
     public void setName(String name) {
         this.name = name;
     }
-    public String getTeam() {
-        return team;
+    public Long getTeam() {
+        return id_team;
     }
-    public void setTeam(String team) {
-        this.team = team;
+    public void setTeam(Long team) {
+        this.id_team = team;
     }
     public String getPosition() {
         return position;

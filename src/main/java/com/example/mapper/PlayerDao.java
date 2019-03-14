@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import com.example.domain.Player;
 
 @Mapper
-public interface PlayerMapper {
+public interface PlayerDao {
     List<Player> findAll();
 
     Player findOne(Long id);

@@ -7,12 +7,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.domain.Player;
-import com.example.mapper.PlayerMapper;
+import com.example.mapper.PlayerDao;
 
 @Service
 public class PlayerService {
     @Autowired
-    private PlayerMapper playerMapper;
+    private PlayerDao playerMapper;
 
     @Transactional
     public List<Player> findAll() {
