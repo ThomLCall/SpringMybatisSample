@@ -1,7 +1,5 @@
 package com.example.monappli.players;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,59 +11,62 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.example.monappli.teams.Team;
 import com.example.monappli.teams.TeamService;
 
 @Controller
 @RequestMapping("/players")
 public class PlayerController {
-    @Autowired
-    private PlayerService playerService;
-    
-    @Autowired
-    private TeamService teamService;
+	@Autowired
+	private PlayerService playerService;
 
-    @GetMapping
-    public String index(Model model) {
-        model.addAttribute("players", playerService.findAll());
-        return "players/index";
-    }
+	@Autowired
+	private TeamService teamService;
 
-    @GetMapping("new")
-    public String newPlayer(Model model) {    	
-    	model.addAttribute("teams", teamService.findAll());
-    	model.addAttribute("player", new Player());
-        return "players/new";
-    }
+	@GetMapping
+	public String index(Model model) {
+		model.addAttribute("players", playerService.findAll());
+		
+		//model.addAttribute("team", teamService.findOne(playerService.findOne()));
 
-    @GetMapping("{id}/edit")
-    public String edit(@PathVariable Long id, Model model) {
-        model.addAttribute("player", playerService.findOne(id));
-        return "players/edit";
-    }
+		// teamService.findOne(id));
+		return "players/index";
+	}
 
-    @GetMapping("{id}")
-    public String show(@PathVariable Long id, Model model) {
-        model.addAttribute("player", playerService.findOne(id));
-        return "players/show";
-    }
+	@GetMapping("new")
+	public String newPlayer(Model model) {
+		model.addAttribute("teams", teamService.findAll());
+		model.addAttribute("player", new Player());
+		return "players/new";
+	}
 
-    @PostMapping
-    public String create(@ModelAttribute Player player) {
-        playerService.save(player);
-        return "redirect:/players";
-    }
+	@GetMapping("{id}/edit")
+	public String edit(@PathVariable Long id, Model model) {
+		model.addAttribute("player", playerService.findOne(id));
+		return "players/edit";
+	}
 
-    @PutMapping("{id}")
-    public String update(@PathVariable Long id, @ModelAttribute Player player) {
-        player.setId(id);
-        playerService.update(player);
-        return "redirect:/players";
-    }
+	@GetMapping("{id}")
+	public String show(@PathVariable Long id, Model model) {
+		model.addAttribute("player", playerService.findOne(id));
+		return "players/show";
+	}
 
-    @DeleteMapping("{id}")
-    public String destroy(@PathVariable Long id) {
-        playerService.delete(id);
-        return "redirect:/players";
-    }
+	@PostMapping
+	public String create(@ModelAttribute Player player) {
+		playerService.save(player);
+		return "redirect:/players";
+	}
+
+	@PutMapping("{id}")
+	public String update(@PathVariable Long id, @ModelAttribute Player player) {
+		player.setId(id);
+		playerService.update(player);
+		return "redirect:/players";
+	}
+
+	@DeleteMapping("{id}")
+	public String destroy(@PathVariable Long id) {
+		playerService.delete(id);
+		return "redirect:/players";
+	}
 }

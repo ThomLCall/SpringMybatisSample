@@ -22,7 +22,7 @@ public interface PlayersRepository {
 	 @Select("SELECT * FROM player WHERE id = #{id}")
 	 	Player findOne(Long id);
 	 
-	 @Insert("INSERT INTO player (name, team, position, diet) VALUES (#{name}, #{team}, #{position}, #{diet})")
+	 @Insert("INSERT INTO player (name, id_team, position, diet) VALUES (#{name}, #{id_team}, #{position}, #{diet})")
 	 	void save(Player player);
 	 
 	 @Update("UPDATE player SET name = #{name}, id_team = #{id_team}, position = #{position}, diet=#{diet} WHERE id = #{id}") 
