@@ -1,5 +1,7 @@
 package com.example.monappli.players;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,11 +13,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.monappli.teams.Team;
+import com.example.monappli.teams.TeamService;
+
 @Controller
 @RequestMapping("/players")
 public class PlayerController {
     @Autowired
     private PlayerService playerService;
+    
+    @Autowired
+    private TeamService teamService;
 
     @GetMapping
     public String index(Model model) {
@@ -24,7 +32,9 @@ public class PlayerController {
     }
 
     @GetMapping("new")
-    public String newPlayer() {
+    public String newPlayer(Model model) {    	
+    	model.addAttribute("teams", teamService.findAll());
+    	model.addAttribute("player", new Player());
         return "players/new";
     }
 

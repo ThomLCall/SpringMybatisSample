@@ -3,7 +3,7 @@ package com.example.monappli.players;
 public class Player {
     private Long id;
     private String name;
-    private Long id_team;
+    private Long team;
     private String position;
     private String diet;
 
@@ -26,10 +26,10 @@ public class Player {
         this.name = name;
     }
     public Long getTeam() {
-        return id_team;
+        return team;
     }
     public void setTeam(Long team) {
-        this.id_team = team;
+        this.team = team;
     }
     public String getPosition() {
         return position;
