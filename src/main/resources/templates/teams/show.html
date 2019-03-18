@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout">
+<head>
+<title>Show Team</title>
+</head>
+<body>
+	<div class="panel panel-primary" layout:fragment="content">
+		<div class="panel-heading">Show Team</div>
+		<div class="panel-body">
+			<div class="form-horizontal" th:object="${team}">
+				<div class="form-group">
+					<label class="col-md-3 control-label">Name</label>
+					<div class="col-md-9 form-control-static" th:text="*{name}"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

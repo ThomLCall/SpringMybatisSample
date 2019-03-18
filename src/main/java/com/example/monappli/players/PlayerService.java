@@ -1,4 +1,4 @@
-package com.example.service;
+package com.example.monappli.players;
 
 import java.util.List;
 
@@ -6,36 +6,36 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.example.domain.Player;
-import com.example.mapper.PlayerMapper;
-
 @Service
 public class PlayerService {
     @Autowired
     private PlayerMapper playerMapper;
+    
+    @Autowired
+    private PlayersRepository playersRepository;
 
     @Transactional
     public List<Player> findAll() {
-        return playerMapper.findAll();
+        return playersRepository.findAll();
     }
 
     @Transactional
     public Player findOne(Long id) {
-        return playerMapper.findOne(id);
+        return playersRepository.findOne(id);
     }
 
     @Transactional
     public void save(Player player) {
-        playerMapper.save(player);
+    	playersRepository.save(player);
     }
 
     @Transactional
     public void update(Player player) {
-        playerMapper.update(player);
+    	playersRepository.update(player);
     }
 
     @Transactional
     public void delete(Long id) {
-        playerMapper.delete(id);
+    	playersRepository.delete(id);
     }
 }

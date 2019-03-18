@@ -1,10 +1,8 @@
-package com.example.mapper;
+package com.example.monappli.players;
 
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
-
-import com.example.domain.Player;
 
 @Mapper
 public interface PlayerMapper {
