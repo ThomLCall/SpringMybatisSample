@@ -26,10 +26,10 @@
           </tr>
         </thead>
         <tbody>
-          <tr th:each="player:${players}" th:object="${player}">
+          <tr th:each="player:${players}" th:object="${player}" >
             <td th:text="*{id}"></td>
             <td th:text="*{name}"></td>
-            <td th:text="*{id_team}"></td>
+            <td th:text="${team.get(player.id_team)}"></td>
             <td th:text="*{position}"></td>
             <td th:text="*{diet}"></td>
             <td><a class="btn btn-default btn-xs" th:href="@{/players/{id}(id=*{id})}">Show</a></td>

@@ -1,5 +1,9 @@
 package com.example.monappli.players;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,7 +15,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.monappli.teams.Team;
 import com.example.monappli.teams.TeamService;
+
+
 
 @Controller
 @RequestMapping("/players")
@@ -21,11 +28,25 @@ public class PlayerController {
 
 	@Autowired
 	private TeamService teamService;
+	
+	// HashMap used to simplify the call to Team name with team id from PlayerController
+	HashMap<Long , String> hash = new HashMap<>();	
 
 	@GetMapping
 	public String index(Model model) {
 		model.addAttribute("players", playerService.findAll());
 		
+		List<Team> Lt =  teamService.findAll();	
+		
+		for(Team t:Lt) { 
+			Long id = t.getId();
+			String name = teamService.findOne(id).getName();			
+			hash.put(id ,name);			
+		}
+		model.addAttribute("team", hash);
+		//model.addAttribute("team", teamService.findOne(hash.) );
+		
+		//model.addAttribute("team", teamService.findOne(playerService.findOne(Player.getId_team())));
 		//model.addAttribute("team", teamService.findOne(playerService.findOne()));
 
 		// teamService.findOne(id));
