@@ -1,6 +1,5 @@
 package com.example.monappli.players;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -44,12 +43,6 @@ public class PlayerController {
 			hash.put(id ,name);			
 		}
 		model.addAttribute("team", hash);
-		//model.addAttribute("team", teamService.findOne(hash.) );
-		
-		//model.addAttribute("team", teamService.findOne(playerService.findOne(Player.getId_team())));
-		//model.addAttribute("team", teamService.findOne(playerService.findOne()));
-
-		// teamService.findOne(id));
 		return "players/index";
 	}
 
@@ -62,6 +55,7 @@ public class PlayerController {
 
 	@GetMapping("{id}/edit")
 	public String edit(@PathVariable Long id, Model model) {
+		model.addAttribute("teams", teamService.findAll());
 		model.addAttribute("player", playerService.findOne(id));
 		return "players/edit";
 	}
@@ -69,6 +63,10 @@ public class PlayerController {
 	@GetMapping("{id}")
 	public String show(@PathVariable Long id, Model model) {
 		model.addAttribute("player", playerService.findOne(id));
+		
+		hash.put(id, teamService.findOne(id).getName());
+		model.addAttribute("team", hash);
+		
 		return "players/show";
 	}
 

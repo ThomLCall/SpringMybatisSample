@@ -20,7 +20,10 @@
 				<div class="form-group">
 					<label class="col-md-3 control-label">Team</label>
 					<div class="col-md-9">
-						<input class="form-control" type="text" th:field="*{team}" />
+						<select class="form-control" th:field="*{id_team}">
+							<option th:each="team : ${teams}" th:value="${team.id}"
+								th:text="${team.name}"></option>
+						</select>
 					</div>
 				</div>
 				<div class="form-group">

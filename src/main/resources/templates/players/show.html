@@ -16,7 +16,7 @@
 				</div>
 				<div class="form-group">
 					<label class="col-md-3 control-label">Team</label>
-					<div class="col-md-9 form-control-static" th:text="*{team}"></div>
+					<div class="col-md-9 form-control-static" th:text="${team.get(player.id_team)}"></div>
 				</div>
 				<div class="form-group">
 					<label class="col-md-3 control-label">Position</label>
