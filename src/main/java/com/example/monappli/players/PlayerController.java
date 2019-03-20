@@ -54,6 +54,10 @@ public class PlayerController {
 			p.setTeam(teamService.findOne(p.getId_team()).getName());
 		}
 		
+		for (Player p : allPlayers) {
+			p.setLc(childService.findAllPlayerChild(p.getId()));
+		}
+		
 		model.addAttribute("team", hash);
 		return "players/index";
 	}
