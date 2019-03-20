@@ -1,4 +1,4 @@
-package com.example.monappli.teams;
+package com.example.monappli.children;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,52 +12,53 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/teams")
-public class TeamController {
+@RequestMapping("/children")
+public class ChildController {
 	
 	@Autowired
-	private TeamService teamService;
+	private ChildService childService;
 	
-    @GetMapping
+	
+	@GetMapping
     public String index(Model model) {
-        model.addAttribute("teams", teamService.findAll());
-        return "teams/index";
+        model.addAttribute("childs", childService.findAll());
+        return "children/indexC";
     }
     
     @GetMapping("new")
-    public String newTeam() {
-        return "teams/new";
+    public String newChild() {
+        return "children/newC";
     }
 
     @GetMapping("{id}/edit")
     public String edit(@PathVariable Long id, Model model) {
-        model.addAttribute("team", teamService.findOne(id));
-        return "teams/edit";
+        model.addAttribute("child", childService.findOne(id));
+        return "children/editC";
     }
 
     @GetMapping("{id}")
     public String show(@PathVariable Long id, Model model) {
-        model.addAttribute("team", teamService.findOne(id));
-        return "teams/show";
+        model.addAttribute("child", childService.findOne(id));
+        return "children/showC";
     }
 
     @PostMapping
-    public String create(@ModelAttribute Team team) {
-    	teamService.save(team);
-        return "redirect:/teams";
+    public String create(@ModelAttribute Child child) {
+    	childService.save(child);
+        return "redirect:/children";
     }
 
     @PutMapping("{id}")
-    public String update(@PathVariable Long id, @ModelAttribute Team team) {
-        team.setId(id);
-        teamService.update(team);
-        return "redirect:/teams";
+    public String update(@PathVariable Long id, @ModelAttribute Child child) {
+    	child.setId(id);
+        childService.update(child);
+        return "redirect:/children";
     }
 
     @DeleteMapping("{id}")
     public String destroy(@PathVariable Long id) {
-    	teamService.delete(id);
-        return "redirect:/teams";
+    	childService.delete(id);
+        return "redirect:/children";
     }
 
 }

@@ -14,10 +14,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.monappli.children.ChildService;
 import com.example.monappli.teams.Team;
 import com.example.monappli.teams.TeamService;
-
-
 
 @Controller
 @RequestMapping("/players")
@@ -28,12 +27,16 @@ public class PlayerController {
 	@Autowired
 	private TeamService teamService;
 	
+	@Autowired
+	private ChildService childService;
+	
 	// HashMap used to simplify the call to Team name with team id from PlayerController
 	HashMap<Long , String> hash = new HashMap<>();	
 
 	@GetMapping
 	public String index(Model model) {
-		model.addAttribute("players", playerService.findAll());
+		List<Player> allPlayers = playerService.findAll();
+		model.addAttribute("players", allPlayers);
 		
 		List<Team> Lt =  teamService.findAll();	
 		
@@ -42,6 +45,15 @@ public class PlayerController {
 			String name = teamService.findOne(id).getName();			
 			hash.put(id ,name);			
 		}
+		
+		/*List<Child>Lc;
+		for (Player p: playerService.findAll()) {
+			Lc.add(childService.findAllPlayerChild(p.getId()));
+		}*/
+		for(Player p : allPlayers) {
+			p.setTeam(teamService.findOne(p.getId_team()).getName());
+		}
+		
 		model.addAttribute("team", hash);
 		return "players/index";
 	}

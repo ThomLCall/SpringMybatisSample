@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout">
+<head>
+<title>Listing Children</title>
+</head>
+<body>
+	<div class="panel panel-success" layout:fragment="content">
+		<div class="panel-heading">
+			Listing Children<a href="/children/newC"
+				class="btn btn-default btn-xs pull-right">New</a>
+		</div>
+		<div class="panel-body" th:if="!${children.size()}">
+			<p>Children are empty</p>
+		</div>
+		<table class="table" th:if="${children.size()}">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Name</th>
+					<th></th>
+					<th></th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="child:${children}" th:object="${child}">
+					<td th:text="*{id}"></td>
+					<td th:text="*{name}"></td>
+					<td><a class="btn btn-default btn-xs"
+						th:href="@{/children/{id}(id=*{id})}">Show</a></td>
+					<td><a class="btn btn-default btn-xs"
+						th:href="@{/children/{id}/edit(id=*{id})}">Edit</a></td>
+					<td>
+						<form th:action="@{/children/{id}(id=*{id})}" th:method="delete">
+							<button class="btn btn-default btn-xs">Destroy</button>
+						</form>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+</body>
+</html>
