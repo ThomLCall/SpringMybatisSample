@@ -46,13 +46,10 @@ public class PlayerController {
 			hash.put(id ,name);			
 		}
 		
-		/*List<Child>Lc;
-		for (Player p: playerService.findAll()) {
-			Lc.add(childService.findAllPlayerChild(p.getId()));
-		}*/
+		/*Mask soluce "team2"
 		for(Player p : allPlayers) {
 			p.setTeam(teamService.findOne(p.getId_team()).getName());
-		}
+		}*/
 		
 		for (Player p : allPlayers) {
 			p.setLc(childService.findAllPlayerChild(p.getId()));

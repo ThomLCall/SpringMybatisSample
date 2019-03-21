@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.monappli.players.Player;
+import com.example.monappli.players.PlayerService;
+
 @Controller
 @RequestMapping("/children")
 public class ChildController {
@@ -18,20 +21,25 @@ public class ChildController {
 	@Autowired
 	private ChildService childService;
 	
+	@Autowired
+	private PlayerService playerService;
+	
 	
 	@GetMapping
     public String index(Model model) {
-        model.addAttribute("childs", childService.findAll());
+        model.addAttribute("children", childService.findAll());
         return "children/indexC";
     }
     
-    @GetMapping("new")
-    public String newChild() {
+    @GetMapping("newC")
+    public String newChild(Model model) {
+    	model.addAttribute("players", playerService.findAll());
         return "children/newC";
     }
 
     @GetMapping("{id}/edit")
     public String edit(@PathVariable Long id, Model model) {
+    	model.addAttribute("players", playerService.findAll());
         model.addAttribute("child", childService.findOne(id));
         return "children/editC";
     }
