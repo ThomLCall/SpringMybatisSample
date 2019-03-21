@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.monappli.children.Child;
 import com.example.monappli.children.ChildService;
 import com.example.monappli.teams.Team;
 import com.example.monappli.teams.TeamService;
@@ -35,27 +36,32 @@ public class PlayerController {
 
 	@GetMapping
 	public String index(Model model) {
+		
+		// Method for players
 		List<Player> allPlayers = playerService.findAll();
 		model.addAttribute("players", allPlayers);
 		
-		List<Team> Lt =  teamService.findAll();	
-		
+		// Classes communication
+		// Method to have the teams (1st Method for the classes communication)
+		List<Team> Lt =  teamService.findAll();			
 		for(Team t:Lt) { 
 			Long id = t.getId();
 			String name = teamService.findOne(id).getName();			
 			hash.put(id ,name);			
 		}
+		model.addAttribute("team", hash);
 		
-		/*Mask soluce "team2"
+		/*Mask solution "team2" (2nd Method for the classes communication)
 		for(Player p : allPlayers) {
 			p.setTeam(teamService.findOne(p.getId_team()).getName());
 		}*/
 		
+		// Method to have the children (2nd Method for the classes communication)
 		for (Player p : allPlayers) {
 			p.setLc(childService.findAllPlayerChild(p.getId()));
 		}
+		model.addAttribute("child", new Child());
 		
-		model.addAttribute("team", hash);
 		return "players/index";
 	}
 

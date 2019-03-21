@@ -2,6 +2,8 @@ package com.example.monappli.players;
 
 import java.util.List;
 
+import com.example.monappli.children.Child;
+
 public class Player {
 	private Long id;
 	private String name;
@@ -11,7 +13,7 @@ public class Player {
 	
 	//lateInit
 	//private String team;
-	private List<String> lc;
+	private List<Child> lc;
 
 	public Long getId() {
 		return id;
@@ -61,11 +63,11 @@ public class Player {
 		this.team = team;
 	}*/
 	
-	public List<String> getLc() {
+	public List<Child> getLc() {
 		return lc;
 	}
 
-	public void setLc(List<String> lc) {
+	public void setLc(List<Child> lc) {
 		this.lc = lc;
 	}
 }

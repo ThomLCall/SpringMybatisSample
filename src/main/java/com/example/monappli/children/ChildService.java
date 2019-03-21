@@ -38,7 +38,7 @@ public class ChildService {
     }
     
     @Transactional
-    public List<String> findAllPlayerChild(Long id) {
+    public List<Child> findAllPlayerChild(Long id) {
     	return childRepository.findAllPlayerChild(id);
     }
 	

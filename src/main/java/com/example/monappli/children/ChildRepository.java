@@ -30,7 +30,7 @@ public interface ChildRepository {
 	 	void delete(Long id);
 	 
 	 // Particular SQL for Children
-	 @Select("SELECT c.name FROM child c JOIN famille f ON c.id = f.id_c JOIN player p ON f.id_p = p.id WHERE p.id = #{id};")
-	 	List<String> findAllPlayerChild(Long id);
+	 @Select("SELECT * FROM child c JOIN famille f ON c.id = f.id_c JOIN player p ON f.id_p = p.id WHERE p.id = #{id};")
+	 	List<Child> findAllPlayerChild(Long id);
 
 }
