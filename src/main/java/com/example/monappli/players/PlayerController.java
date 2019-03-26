@@ -49,12 +49,7 @@ public class PlayerController {
 			String name = teamService.findOne(id).getName();			
 			hash.put(id ,name);			
 		}
-		model.addAttribute("team", hash);
-		
-		/*Mask solution "team2" (2nd Method for the classes communication)
-		for(Player p : allPlayers) {
-			p.setTeam(teamService.findOne(p.getId_team()).getName());
-		}*/
+		model.addAttribute("team", hash);		
 		
 		// Method to have the children (2nd Method for the classes communication)
 		for (Player p : allPlayers) {

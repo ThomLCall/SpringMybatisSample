@@ -28,9 +28,6 @@ public class ChildService {
    
     public void save(Child child) {
     	childRepository.save(child);
-    	//correction to have the Id of child because this id is null in the object 
-    	/*Long idchild = childRepository.maxid();
-    	childRepository.saveF(child.getIdplayer(), idchild);*/
     	childRepository.saveF(child.getIdplayer(), child.getId());
     }
 

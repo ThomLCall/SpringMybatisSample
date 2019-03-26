@@ -12,7 +12,6 @@ public class Player {
 	private String diet;
 	
 	//lateInit
-	//private String team;
 	private List<Child> lc;
 
 	public Long getId() {
@@ -54,14 +53,6 @@ public class Player {
 	public void setPosition(String position) {
 		this.position = position;
 	}
-	
-	/*public String getTeam() {
-		return team;
-	}
-
-	public void setTeam(String team) {
-		this.team = team;
-	}*/
 	
 	public List<Child> getLc() {
 		return lc;

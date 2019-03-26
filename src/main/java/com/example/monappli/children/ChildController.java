@@ -38,7 +38,6 @@ public class ChildController {
 			c.setLp(childService.findAllChildsPlayer(c.getId()));
 		}	
 		model.addAttribute("player", new Player());
-		//model.addAttribute("child", new Child());
         
         return "children/indexC";
     }
@@ -61,9 +60,7 @@ public class ChildController {
     public String show(@PathVariable Long id, Model model) {
     	Child c = childService.findOne(id);
     	c.setLp(childService.findAllChildsPlayer(id));
-        //List<Player> players = c.getLp();
-    	model.addAttribute("child", c);
-       
+    	model.addAttribute("child", c);       
         model.addAttribute("player", new Player());       
         
         return "children/showC";

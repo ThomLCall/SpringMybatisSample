@@ -50,7 +50,4 @@ public interface ChildRepository {
 	 @Delete("DELETE FROM famille WHERE id_c = #{id}")
 	 	void deleteF(Long id);
 	 
-	 @Select("SELECT MAX(id) FROM child")
-	  	Long maxid();
-
 }
