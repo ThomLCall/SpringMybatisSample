@@ -19,6 +19,7 @@
 				<tr>
 					<th>ID</th>
 					<th>Name</th>
+					<th>Player(s)</th>
 					<th></th>
 					<th></th>
 					<th></th>
@@ -28,6 +29,12 @@
 				<tr th:each="child:${children}" th:object="${child}">
 					<td th:text="*{id}"></td>
 					<td th:text="*{name}"></td>
+					<td th:if="${#lists.isEmpty(child.Lp)}">--NO PLAYER (need corrections)--</td>
+					<td th:if="${not #lists.isEmpty(child.Lp)}">
+						<span th:each="player:*{Lp}" th:object="${player}">
+							<span th:text="${player.name}"></span>
+						</span>
+					</td>
 					<td><a class="btn btn-default btn-xs"
 						th:href="@{/children/{id}(id=*{id})}">Show</a></td>
 					<td><a class="btn btn-default btn-xs"
