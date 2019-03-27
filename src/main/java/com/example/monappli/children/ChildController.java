@@ -1,6 +1,5 @@
 package com.example.monappli.children;
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,9 +25,7 @@ public class ChildController {
 	
 	@Autowired
 	private PlayerService playerService;
-	
-	HashMap<Long , String> hash = new HashMap<>();		
-	
+		
 	@GetMapping
     public String index(Model model) {        
         List<Child> allChildren = childService.findAll();  

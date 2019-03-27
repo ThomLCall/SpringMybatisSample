@@ -12,9 +12,6 @@ import com.example.monappli.teams.Team;
 public class TeamService {
 
 	@Autowired
-	private TeamMapper teamMapper;
-
-	@Autowired
 	private TeamRepository teamRepository;
 
 	@Transactional

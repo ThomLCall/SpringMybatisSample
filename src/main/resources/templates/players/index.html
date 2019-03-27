@@ -38,7 +38,7 @@
 					<td th:if="${#lists.isEmpty(player.lc)}">--NO CHILD--</td>
 					<td th:if="${not #lists.isEmpty(player.lc)}">
 						<span th:each="child:*{lc}" th:object="${child}">
-							<span th:text="${child.name}"></span>
+							<span th:text="${child.name}"></span><br/>
 						</span>
 					</td>
 					<td><a class="btn btn-default btn-xs"
@@ -47,7 +47,7 @@
 						th:href="@{/players/{id}/edit(id=*{id})}">Edit</a></td>
 					<td>
 						<form th:action="@{/players/{id}(id=*{id})}" th:method="delete">
-							<button class="btn btn-default btn-xs">Destroy</button>
+							<button class="btn-danger btn btn-default btn-xs ">Destroy</button>
 						</form>
 					</td>
 				</tr>

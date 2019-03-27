@@ -32,7 +32,7 @@
 					<td th:if="${#lists.isEmpty(child.Lp)}">--NO PLAYER (need corrections)--</td>
 					<td th:if="${not #lists.isEmpty(child.Lp)}">
 						<span th:each="player:*{Lp}" th:object="${player}">
-							<span th:text="${player.name}"></span>
+							<span th:text="${player.name}"></span><br/>
 						</span>
 					</td>
 					<td><a class="btn btn-default btn-xs"
