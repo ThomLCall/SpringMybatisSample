@@ -55,7 +55,7 @@ public class TeamController {
     }
 
     @DeleteMapping("{id}")
-    public String destroy(@PathVariable Long id) {
+    public String destroy(@PathVariable Long id) throws NullIDException {
     	teamService.delete(id);
         return "redirect:/teams";
     }

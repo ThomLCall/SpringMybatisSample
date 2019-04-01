@@ -25,18 +25,21 @@ public class TeamService {
 	}
 
 	@Transactional
-	public void save(Team team) {
-		teamRepository.save(team);
+	public int save(Team team) {
+		return teamRepository.save(team);
 	}
 
 	@Transactional
-	public void update(Team team) {
-		teamRepository.update(team);
+	public int update(Team team) {
+		return teamRepository.update(team);
+	}
+	
+	@Transactional
+	public int delete(Long id) throws NullIDException {
+		if (id == null) 
+			throw new NullIDException("ID null non valide");		
+		return teamRepository.delete(id);
 	}
 
-	@Transactional
-	public void delete(Long id) {
-		teamRepository.delete(id);
-	}
 
 }

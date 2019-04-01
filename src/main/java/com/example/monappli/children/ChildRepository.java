@@ -25,13 +25,13 @@ public interface ChildRepository {
 	 
 	 @Insert("INSERT INTO child (name) VALUES (#{name})")
 	 @Options(useGeneratedKeys = true, keyProperty = "id")
-	 	void save(Child child);
+	 	int save(Child child);
 	 
 	 @Update("UPDATE child SET name = #{name} WHERE id = #{id}") 
-	 	void update(Child child);
+	 	int update(Child child);
 	 
 	 @Delete("DELETE FROM child WHERE id = #{id}")
-	 	void delete(Long id);
+	 	int delete(Long id);
 	 
 	 // Particular SQL for Children
 	 @Select("SELECT c.* FROM child c JOIN famille f ON c.id = f.id_c JOIN player p ON f.id_p = p.id WHERE p.id = #{id};")
@@ -42,12 +42,12 @@ public interface ChildRepository {
 	 
 	 // Family Part	 
 	 @Insert("INSERT INTO famille (id_p, id_c) VALUES (#{idplayer}, #{idchild})")
-	 	void saveF(@Param("idplayer") Long idplayer, @Param("idchild") Long idchild);
+	 	int saveF(@Param("idplayer") Long idplayer, @Param("idchild") Long idchild);
 	 
 	 /*@Update("UPDATE famille SET id_p = #{idnewp} WHERE id_c = #{id} AND id_p = #{idoldp}") 
 	 	void updateF(Child child, Long idoldp, Long idnewp );*/
 	 
 	 @Delete("DELETE FROM famille WHERE id_c = #{id}")
-	 	void deleteF(Long id);
+	 	int deleteF(Long id);
 	 
 }

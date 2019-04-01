@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.monappli.players.Player;
 import com.example.monappli.players.PlayerService;
+import com.example.monappli.teams.NullIDException;
 
 @Controller
 @RequestMapping("/children")
@@ -77,7 +78,7 @@ public class ChildController {
     }
 
     @DeleteMapping("{id}")
-    public String destroy(@PathVariable Long id) {
+    public String destroy(@PathVariable Long id) throws NullIDException {
     	childService.delete(id);
         return "redirect:/children";
     }

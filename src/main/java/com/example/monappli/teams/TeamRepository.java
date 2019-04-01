@@ -20,11 +20,14 @@ public interface TeamRepository {
 	 	Team findOne(Long id);
 	 
 	 @Insert("INSERT INTO team (name) VALUES (#{name})")
-	 	void save(Team team);
+	 	int save(Team team);
 	 
 	 @Update("UPDATE team SET name = #{name} WHERE id = #{id}") 
-	 	void update(Team team);
+	 	int update(Team team);
 	 
 	 @Delete("DELETE FROM team WHERE id = #{id}")
-	 	void delete(Long id);
+	 	int delete(Long id);
+	 
+	 /**@Delete("DELETE FROM player WHERE id_team = #{id}")
+	 	int deleteP(Long id);*/
 }

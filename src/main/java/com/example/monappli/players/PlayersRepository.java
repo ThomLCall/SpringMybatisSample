@@ -23,13 +23,13 @@ public interface PlayersRepository {
 	 	Player findOne(Long id);
 	 
 	 @Insert("INSERT INTO player (name, id_team, position, diet) VALUES (#{name}, #{id_team}, #{position}, #{diet})")
-	 	void save(Player player);
+	 	int save(Player player);
 	 
 	 @Update("UPDATE player SET name = #{name}, id_team = #{id_team}, position = #{position}, diet=#{diet} WHERE id = #{id}") 
-	 	void update(Player player);
+	 	int update(Player player);
 	 
 	 @Delete("DELETE FROM player WHERE id = #{id}")
-	 	void delete(Long id);
+	 	int delete(Long id);
 	 
 	// Examples Functions
 

@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.monappli.teams.NullIDException;
+
 @Service
 public class PlayerService {
     
@@ -23,17 +25,19 @@ public class PlayerService {
     }
 
     @Transactional
-    public void save(Player player) {
-    	playersRepository.save(player);
+    public int save(Player player) {
+    	return playersRepository.save(player);
     }
 
     @Transactional
-    public void update(Player player) {
-    	playersRepository.update(player);
+    public int update(Player player) {
+    	return playersRepository.update(player);
     }
 
     @Transactional
-    public void delete(Long id) {
-    	playersRepository.delete(id);
+    public int delete(Long id) throws NullIDException{
+    	if (id == null) 
+			throw new NullIDException("ID null non valide");		
+    	return playersRepository.delete(id);
     }
 }

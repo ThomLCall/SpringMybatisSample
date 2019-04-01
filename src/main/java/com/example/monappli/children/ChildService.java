@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.monappli.players.Player;
+import com.example.monappli.teams.NullIDException;
 
 @Service
 public class ChildService {
@@ -24,27 +25,26 @@ public class ChildService {
         return childRepository.findOne(id);
     }
 
-    @Transactional
-   
-    public void save(Child child) {
-    	childRepository.save(child);
-    	childRepository.saveF(child.getIdplayer(), child.getId());
+    @Transactional   
+    public int save(Child child) {
+    	return childRepository.save(child) + childRepository.saveF(child.getIdplayer(), child.getId());
     }
 
     @Transactional
-    public void update(Child child) {
-    	childRepository.update(child);    	
+    public int update(Child child) {
+    	return childRepository.update(child);    	
     	//childRepository.updateF(child);
     }
 
     @Transactional
-    public void delete(Long id) {
-    	childRepository.delete(id);
-    	childRepository.deleteF(id);
+    public int delete(Long id) throws NullIDException {
+    	if (id == null) 
+			throw new NullIDException("ID null non valide");
+    	return childRepository.delete(id) + childRepository.deleteF(id);
     }
     
     @Transactional
-    public List<Child> findAllPlayerChild(Long id) {
+    public List<Child> findAllPlayerChild(Long id) {    	
     	return childRepository.findAllPlayerChild(id);
     }
     
