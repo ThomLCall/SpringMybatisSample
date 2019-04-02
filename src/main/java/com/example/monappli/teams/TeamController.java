@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.monappli.exceptions.NullIDException;
+
 @Controller
 @RequestMapping("/teams")
 public class TeamController {
@@ -55,8 +57,12 @@ public class TeamController {
     }
 
     @DeleteMapping("{id}")
-    public String destroy(@PathVariable Long id) throws NullIDException {
-    	teamService.delete(id);
+    public String destroy(@PathVariable Long id) {    	
+    	try {
+    		teamService.delete(id);
+		} catch (NullIDException e) {
+			System.out.println(e.getMessage());
+		}    	
         return "redirect:/teams";
     }
 

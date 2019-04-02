@@ -10,6 +10,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import com.example.monappli.exceptions.NullIDException;
 import com.example.monappli.players.PlayersRepository;
 
 @RunWith( MockitoJUnitRunner.class)
@@ -75,7 +76,7 @@ public class TeamServiceTest {
 	/////////////////////////////////////////////////////////
 	
 	@Test //Nominal Case : all is good
-	public void shouldDeleteT_whenTeamExist() {
+	public void shouldDeleteT_whenTeamExist() throws NullIDException {
 		//// Given
 		/**Reproduction of the implementations that we need for the delete()
 		 * 
@@ -90,14 +91,8 @@ public class TeamServiceTest {
         when(teamRepository.delete(t.getId())).thenReturn(1);
 
         //// When
-        int result;
-		try {
-			result = teamservice.delete(t.getId());
-		} catch (NullIDException e) {
-			result = -1;// send an absurd result to give the test error message
-			e.printStackTrace();
-		}
-		
+        final int result = teamservice.delete(t.getId());
+			
         //// Then
         // Verify teamRepository used 1 time
         Mockito.verify(this.teamRepository, Mockito.times(1)).delete(t.getId());
@@ -105,26 +100,17 @@ public class TeamServiceTest {
         Assert.assertEquals( "1 ligne doit être supprimé", 1, result ); 
         } 
 	
-	@Test //(expected = NullIDException.class)
-	public void shouldDoNothing_whenTeamNotExist() {
-		// Given
-		       
-		//doThrow(new NullIDException("Error occurred")).when(teamRepository).delete(t.getId());
-		when(teamRepository.delete(t.getId())).thenReturn(0);
-
+	@Test (expected = NullIDException.class)
+	public void shouldDoNothing_whenTeamNotExist() throws NullIDException {
+		// Given		       
+		when(teamRepository.delete(null)).thenReturn(0); //t.getId()
+				
         // When
-        int result;
-		try {
-			result = teamservice.delete(t.getId());
-			//Assertions.fail("Il n'y avait pas de team");
-		} catch (NullIDException e) {			
-			e.printStackTrace();
-			result = -1;
-		}        
+		teamservice.delete(null);
 
         // Then
         Mockito.verify(this.teamRepository, Mockito.times(1)).delete(t.getId());
-        Assert.assertEquals( "La team n'existe pas", 0, result ); 
+
 	}
 	
 	

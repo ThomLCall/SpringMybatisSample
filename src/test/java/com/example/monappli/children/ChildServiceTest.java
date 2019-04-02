@@ -10,7 +10,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import com.example.monappli.teams.NullIDException;
+import com.example.monappli.exceptions.NullIDException;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ChildServiceTest {
@@ -69,7 +69,7 @@ public class ChildServiceTest {
 	/////////////////////////////////////////////////////////
 
 	@Test // Nominal Case : all is good
-	public void shouldDeleteC_whenChildExist() {
+	public void shouldDeleteC_whenChildExist() throws NullIDException {
 		// Given		
 		c.setId(5L);
 		c.setName("Oedipe");
@@ -77,14 +77,8 @@ public class ChildServiceTest {
 		when(childRepository.delete(c.getId())).thenReturn(1);
 
 		// When
-		int result;
-		try {
-			result = childservice.delete(c.getId());
-		} catch (NullIDException e) {
-			result = -1;
-			e.printStackTrace();
-		}
-
+		final int result = childservice.delete(c.getId());
+	
 		// Then
 		Mockito.verify(this.childRepository, Mockito.times(1)).delete(c.getId());
 		Assert.assertEquals("1 ligne doit être supprimé", 1, result);
@@ -92,23 +86,15 @@ public class ChildServiceTest {
 	
 	
 	@Test 
-	public void shouldDoNothing_whenChildNotExist() {
+	public void shouldDoNothing_whenChildNotExist() throws NullIDException {
 		// Given
-
-		when(childRepository.delete(c.getId())).thenReturn(0);
+		when(childRepository.delete(null)).thenReturn(0);
 
         // When
-        int result;
-		try {
-			result = childservice.delete(c.getId());
-		} catch (NullIDException e) {			
-			e.printStackTrace();
-			result = -1;
-		}        
+        childservice.delete(null);		    
 
         // Then
-        Mockito.verify(this.childRepository, Mockito.times(1)).delete(c.getId());
-        Assert.assertEquals( "La team n'existe pas", 0, result ); 
+        Mockito.verify(this.childRepository, Mockito.times(1)).delete(c.getId());       
 	}
 
 }

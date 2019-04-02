@@ -10,7 +10,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import com.example.monappli.teams.NullIDException;
+import com.example.monappli.exceptions.NullIDException;
 
 @RunWith(MockitoJUnitRunner.class)
 public class PlayerServiceTest {
@@ -30,7 +30,7 @@ public class PlayerServiceTest {
 	/////////////////////////////////////////////////////////
 
 	@Test
-	public void shouldSaveT_whenTeamExist() {
+	public void shouldSaveP_whenPlayerExist() {
 		// Given
 		p.setId(1L);
 		p.setName("Pierre");
@@ -53,7 +53,7 @@ public class PlayerServiceTest {
 	/////////////////////////////////////////////////////////
 
 	@Test
-	public void shouldUpdateT_whenTeamExist() {
+	public void shouldUpdateP_whenPlayerExist() {
 		// Given
 		p.setId(1L);
 		p.setName("Pierre");
@@ -67,7 +67,7 @@ public class PlayerServiceTest {
 		int result = playerservice.update(p);
 
 		// Then
-		Mockito.verify(this.playersRepository, Mockito.times(1)).update(t);
+		Mockito.verify(this.playersRepository, Mockito.times(1)).update(p);
 		Assert.assertEquals("1 ligne doit être mise à jour", 1, result);
 	}
 
@@ -76,7 +76,7 @@ public class PlayerServiceTest {
 	/////////////////////////////////////////////////////////
 
 	@Test // Nominal Case : all is good
-	public void shouldDeleteT_whenTeamExist() {
+	public void shouldDeleteP_whenPlayerExist() throws NullIDException {
 		// Given
 		p.setId(1L);
 		p.setName("Pierre");
@@ -87,35 +87,22 @@ public class PlayerServiceTest {
 		when(playersRepository.delete(p.getId())).thenReturn(1);
 
 		// When
-		int result;
-		try {
-			result = playerservice.delete(p.getId());
-		} catch (NullIDException e) {
-			result = -1;// send an absurd result to give the test error message
-			e.printStackTrace();
-		}
+        final int result = playerservice.delete(p.getId());
 
 		// Then
 		Mockito.verify(this.playersRepository, Mockito.times(1)).delete(p.getId());
 		Assert.assertEquals("1 ligne doit être supprimé", 1, result);
 	}
 
-	@Test // (expected = NullIDException.class)
-	public void shouldDoNothing_whenTeamNotExist() {
+	@Test (expected = NullIDException.class)
+	public void shouldDoNothing_whenPlayerNotExist() throws NullIDException {
 		// Given
-		when(playersRepository.delete(p.getId())).thenReturn(0);
+		when(playersRepository.delete(null)).thenReturn(0);
 
 		// When
-		int result;
-		try {
-			result = playerservice.delete(p.getId());
-		} catch (NullIDException e) {
-			e.printStackTrace();
-			result = -1;
-		}
+		playerservice.delete(null);		
 
 		// Then
 		Mockito.verify(this.playersRepository, Mockito.times(1)).delete(p.getId());
-		Assert.assertEquals("La team n'existe pas", 0, result);
 	}
 }

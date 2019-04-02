@@ -1,4 +1,4 @@
-package com.example.monappli.teams;
+package com.example.monappli.exceptions;
 
 public class NullIDException extends Exception {
 

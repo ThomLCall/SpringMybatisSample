@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.example.monappli.teams.NullIDException;
+import com.example.monappli.exceptions.NullIDException;
 
 @Service
 public class PlayerService {
